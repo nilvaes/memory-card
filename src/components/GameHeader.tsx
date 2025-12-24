@@ -8,7 +8,7 @@ export default function GameHeader({
   return (
     <div
       id="game-header"
-      className="flex flex-col text-slate-300 justify-center bg-slate-700 mx-2 items-center py-2 px-10 rounded"
+      className="flex flex-col text-slate-300 justify-center mx-2 items-center py-2 px-10 rounded"
     >
       <h1 className="font-bold text-2xl">Memory Card Game</h1>
       <div className="flex gap-5 mt-4">
