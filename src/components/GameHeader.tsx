@@ -1,13 +1,22 @@
-export default function GameHeader() {
+export default function GameHeader({
+  score,
+  moves,
+}: {
+  score: number;
+  moves: number;
+}) {
   return (
-    <div id="game-header" className="flex flex-col">
-      <h1>Memory Card Game</h1>
-      <div className="flex justify-between">
+    <div
+      id="game-header"
+      className="flex flex-col text-slate-300 justify-center bg-slate-700 mx-2 items-center py-2 px-10 rounded"
+    >
+      <h1 className="font-bold text-2xl">Memory Card Game</h1>
+      <div className="flex gap-5 mt-4">
         <div>
-          <span>Score:</span> <span>0</span>
+          <span>Score:</span> <span>{score}</span>
         </div>
         <div>
-          <span>Moves:</span> <span>0</span>
+          <span>Moves:</span> <span>{moves}</span>
         </div>
       </div>
     </div>
