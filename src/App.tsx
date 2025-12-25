@@ -1,15 +1,14 @@
 import Cards from "./components/Cards";
 import GameHeader from "./components/GameHeader";
-
-function startGame() {
-  return console.log("hello world");
-}
+import { useGame } from "./hooks/useGame";
 
 function App() {
+  const { cards, score, moves, startGame } = useGame();
+
   return (
     <div className=" flex flex-col items-center justify-center min-h-screen bg-slate-800">
-      <GameHeader score={10} moves={10} onStart={startGame} />
-      <Cards />
+      <GameHeader score={score} moves={moves} onStart={startGame} />
+      <Cards cards={cards} />
     </div>
   );
 }
