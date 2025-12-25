@@ -1,9 +1,11 @@
 export default function GameHeader({
   score,
   moves,
+  onStart,
 }: {
   score: number;
   moves: number;
+  onStart: () => void;
 }) {
   return (
     <div
@@ -19,6 +21,9 @@ export default function GameHeader({
           <span>Moves:</span> <span>{moves}</span>
         </div>
       </div>
+      <button className="bg-slate-950 text-white p-2 rounded" onClick={onStart}>
+        Start Game
+      </button>
     </div>
   );
 }
