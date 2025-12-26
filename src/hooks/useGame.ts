@@ -2,7 +2,8 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 
 export type CardValue = {
   id: string;
-  matchKey: string;
+  isMatched: boolean;
+  isFlipped: boolean;
   imgSrc: string;
   label: string;
 };
@@ -32,8 +33,8 @@ const buildDeck = (): CardValue[] =>
     const label = file.replace(".png", "");
     const imgSrc = `/assets/${file}`;
     return [
-      { id: `${label}-a`, matchKey: label, imgSrc, label },
-      { id: `${label}-b`, matchKey: label, imgSrc, label },
+      { id: `${label}-a`, isMatched: false, isFlipped: false, imgSrc, label },
+      { id: `${label}-b`, isMatched: false, isFlipped: false, imgSrc, label },
     ];
   });
 
@@ -42,6 +43,22 @@ export function useGame() {
   const [cards, setCards] = useState<CardValue[]>([]);
   const [score, setScore] = useState(0);
   const [moves, setMoves] = useState(0);
+
+  const handleCardClick = (card: CardValue) => {
+    // dont allow clicking if card is already flipped or matched
+    if (card.isFlipped || card.isMatched) {
+      return;
+    }
+    // update card flipped state
+    const newCards = cards.map((c: CardValue) => {
+      if (c.id === card.id) {
+        return { ...c, isFlipped: true };
+      } else {
+        return c;
+      }
+    });
+    setCards(newCards);
+  };
 
   const startGame = useCallback(() => {
     setCards(shuffle(baseDeck));
@@ -54,5 +71,5 @@ export function useGame() {
     startGame();
   }, [startGame]);
 
-  return { cards, score, moves, startGame };
+  return { cards, score, moves, startGame, handleCardClick };
 }
