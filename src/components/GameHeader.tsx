@@ -1,28 +1,27 @@
 export default function GameHeader({
   score,
   moves,
-  onStart,
+  onReset,
 }: {
   score: number;
   moves: number;
-  onStart: () => void;
+  onReset: () => void;
 }) {
   return (
-    <div
-      id="game-header"
-      className="flex flex-col text-slate-300 justify-center mx-2 items-center py-2 px-10 rounded"
-    >
+    <div className="game-header">
       <h1 className="font-bold text-2xl">Memory Card Game</h1>
-      <div className="flex gap-5 mt-4">
-        <div>
-          <span>Score:</span> <span>{score}</span>
+      <div className="stats">
+        <div className="stat-item">
+          <span className="stat-label">Score:</span>{" "}
+          <span className="stat-value">{score}</span>
         </div>
-        <div>
-          <span>Moves:</span> <span>{moves}</span>
+        <div className="stat-item">
+          <span className="stat-label">Moves:</span>{" "}
+          <span className="stat-value">{moves}</span>
         </div>
       </div>
-      <button className="bg-slate-950 text-white p-2 rounded" onClick={onStart}>
-        Start Game
+      <button className="reset-btn" onClick={onReset}>
+        New Game
       </button>
     </div>
   );

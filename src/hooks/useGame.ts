@@ -1,14 +1,14 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 export type CardValue = {
-  id: string;
+  id: number;
   isMatched: boolean;
   isFlipped: boolean;
   imgSrc: string;
   label: string;
 };
 
-const imageFiles = [
+const cardValues: string[] = [
   "drawing.png",
   "helmet.png",
   "shoes.png",
@@ -17,7 +17,15 @@ const imageFiles = [
   "tree.png",
   "writing.png",
   "yelpaze.png",
-] as const;
+  "drawing.png",
+  "helmet.png",
+  "shoes.png",
+  "stones.png",
+  "tea.png",
+  "tree.png",
+  "writing.png",
+  "yelpaze.png",
+];
 
 const shuffle = <T>(arr: T[]) => {
   const copy = [...arr];
@@ -41,6 +49,7 @@ const buildDeck = (): CardValue[] =>
 export function useGame() {
   const baseDeck = useMemo(() => buildDeck(), []);
   const [cards, setCards] = useState<CardValue[]>([]);
+  const [flippedCards, setFlippedCards] = useState([]);
   const [score, setScore] = useState(0);
   const [moves, setMoves] = useState(0);
 
@@ -58,6 +67,18 @@ export function useGame() {
       }
     });
     setCards(newCards);
+
+    const newFlippedCards = [...flippedCards, card.id];
+    setFlippedCards(newFlippedCards);
+
+    // check for match if two cards are flipped
+    if (flippedCards.length === 1) {
+      const firstCard = cards[flippedCards[0]];
+
+      if (firstCard.label === card.label) {
+        alert("Match");
+      }
+    }
   };
 
   const startGame = useCallback(() => {
