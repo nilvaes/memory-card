@@ -1,4 +1,12 @@
-export default function Card({ card, onClick }) {
+import type { CardType } from "../hooks/useGame";
+
+export default function Card({
+  card,
+  onClick,
+}: {
+  card: CardType;
+  onClick: (card: CardType) => void;
+}) {
   return (
     <div
       className={`card ${card.isFlipped ? "flipped" : ""} ${
