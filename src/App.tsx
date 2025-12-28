@@ -113,12 +113,18 @@ function App() {
   } = useGame(cardValues);
   return (
     <div className="app">
-      <GameHeader score={score} moves={moves} onReset={initializeGame} />
-      {isGameComplete && <WinMessage moves={moves} />}
-      <div className="cards-grid">
-        {cards.map((card) => (
-          <Card card={card} onClick={handleCardClick} key={card.id} />
-        ))}
+      <div className="app-layout">
+        <div className="side-panel">
+          <GameHeader score={score} moves={moves} onReset={initializeGame} />
+          {isGameComplete && <WinMessage moves={moves} />}
+        </div>
+        <div className="board">
+          <div className="cards-grid">
+            {cards.map((card) => (
+              <Card card={card} onClick={handleCardClick} key={card.id} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
