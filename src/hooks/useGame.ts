@@ -49,7 +49,6 @@ export const useGame = (cardValues: CardType[]) => {
   }, []);
 
   const handleCardClick = (card: CardType) => {
-    console.log(card.value);
     // dont allow clicking if already flipped, or matched
     if (
       card.isFlipped ||
